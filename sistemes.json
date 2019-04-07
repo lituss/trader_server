@@ -1,0 +1,1 @@
+[{"nom":"3EMAS","classe":"SistemaMitges","actiu": 1,"minCandles": 50,"indicadors":[{"nom":"Ema_curta","pes":1,"parametres":[{"nom":"Periodes","valor":"10"}]},{"nom":"Ema_mitja","pes":1,"parametres":[{"nom":"Periodes","valor":"20"}]},{"nom":"Ema_llarga","pes":1,"parametres":[{"nom":"Periodes","valor":"50"}]}]}]

@@ -1,0 +1,1 @@
+{"fecha":"2019-03-15T16:17:39.377Z","tipus":"parcial","valor":0}

@@ -1,0 +1,1 @@
+{"fecha":"2019-03-15T17:30:09.564Z","tipus":"parcial","valor":0}{"fecha":"2019-03-15T17:44:10.571Z","tipus":"parcial","valor":5030.1810865191155}{"fecha":"2019-03-15T17:44:10.572Z","tipus":"saldo","valor":5030.1810865191155}{"fecha":"2019-03-15T18:03:10.574Z","tipus":"parcial","valor":-5030.1810865191155}{"fecha":"2019-03-15T18:03:10.577Z","tipus":"saldo","valor":0}
