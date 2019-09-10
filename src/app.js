@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const sincronitza = require('./sincronitza.js');
+const sincronitza = require('./new/Sincronitza.js/index.js.js.js');
 
 function cbhttp(req,res){
     res.send('felicidades, conexion con express ok');
@@ -31,7 +31,7 @@ app.get('/sincronitza',(req,resp)=>{
 
 app.listen(3001,()=>{console.log('servidor iniciado v 2.0');});
 
-const sum = require('./modulMeu.js');
+const sum = require('./modulMeu.js/index.js');
 console.log('suma : ',2,3,sum.suma(2,3));
 console.log('ara : ' + Date());
 let valor = '';

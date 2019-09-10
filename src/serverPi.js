@@ -2,8 +2,8 @@ const fs = require ('fs');
 const path = require('path');
 const { SistemaMitges } = require('./Sistemes.js');
 const llistaSistemes = {SistemaMitges};
-const {_Bitlletera,NewMayor} = require('./contab.js');
-const { WsServer } = require('./WsServer.js');
+const {_Bitlletera,NewMayor} = require('./contab.js/index.js');
+const { WsServer } = require('./new/WsServer.js');
 //const {Sfs} = require ('./Sfs.js');
 
 //import { getHeapSpaceStatistics } from "v8";

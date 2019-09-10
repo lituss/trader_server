@@ -99,7 +99,7 @@ const { SistemaMitges } = require('./Sistemes.js');
 //init(SistemaMitges);
 const llistaSistemes = {SistemaMitges} 
 
-const { WsServer } = require('./WsServer.js');
+const { WsServer } = require('./new/WsServer.js');
 
 const fs = require('fs');
 

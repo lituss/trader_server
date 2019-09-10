@@ -11,7 +11,9 @@
             //"program": "${workspaceFolder}\\serverPi.js"
             //"program": "${workspaceFolder}\\simula.js"
             //"program": "${workspaceFolder}\\sincronitza.js"
-            "program": "${workspaceFolder}\\escoltador.js"
+            //"program": "${workspaceFolder}\\escoltador.js"
+            "program": "${workspaceFolder}\\src\\new\\Trader.js"
+            //"program": "${workspaceFolder}\\src\\new\\test.js"
         }
     ]
 }

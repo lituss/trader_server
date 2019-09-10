@@ -1,4 +1,4 @@
-Indicadors = require ('./Indicadors.js');
+Indicadors = require ('./Indicadors.js/index.js');
 
 class SistemaMitges{
 

@@ -1,8 +1,32 @@
-const Gdax = require('gdax');
-const sql = require('./sql.js');
+/*const Gdax = require('gdax');
+const sql = require('../sql.js');
 const publicClient = new Gdax.PublicClient();
-sql.conecta();
+*/
+//sql.conecta();
 //getPairs();
+
+class Sincronitza {
+    constructor(trader){
+        this.trader = trader;
+    }
+
+    async init(){
+        console.log('executant sincronitza init ...');
+        let parells = await this.trader.exchange.getPairs();
+        console.log('parells : ',parells);
+        await this.trader.sql.updatePairs(parells);
+        let dbParells = await this.trader.sql.getPairs();
+        console.log('dbPArells : ',dbParells);
+        //let parells = await this.getGdaxPairs();
+        this.trader.exchange.sincronitzaDB(dbParells);
+    }
+
+    
+    
+}
+
+
+module.exports = {Sincronitza};
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -34,22 +58,7 @@ function test(){
     publicClient.getProductHistoricRates('BTC-USD',parametres,tracta);
 }
 
-async function sincronitza(exchange){
-    limits = sql.getFirstLast(exchange);
-    console.log(limits);
-    for (aux_lim = 0 ; aux_lim < limits.lenght ; aux_lim ++){
-        aux = limits[aux_lim];
 
-
-    
-        switch (exchange){
-            case 'GDAX' : auxSincroGDAX(pair,dataInicial,dataFinal);
-            break;
-            default:
-            throw err;
-        }
-    }
-}
 
 async function sincronitza(exchange,pair,dataInicial,dataFinal,ws){
     
@@ -145,60 +154,7 @@ async function nouSincroGDAX(pair,dataInicial,dataFinal,ws){
 
 
 
-    async function auxSincroGDAX(pair,dataInicial,dataFinal){
-    //let dataInicial = new Date('2017-01-01T00:01:00.000Z');
-    //let dataFinal   = new Date();
-   // return;
-    let parametres = {};
-    console.log(dataInicial);
-    let inici = dataInicial.getTime() ; 
-    let final =  dataFinal.getTime() ;
-    let conta = 1;
-    let data = null;
-    for (part = inici ;   part < final;){
-        parametres.start = new Date(part);
-        part +=60*1000*300; // 60 segons 1000000 microsegons 300 registres
-        parametres.end = new Date(part);
-        parametres.granularity = 60;
-        try{
-        data = await publicClient.getProductHistoricRates(pair,parametres);
-        }catch (e) {throw e};
-        console.log("bucle : part final ->> "+ conta++ +' :: '+part+' : '+final);
-        data = data.filter(d=>d[0] >= inici / 1000 && d[0]<=final/1000);
-        if (data.length > 0) {
-            tracta(data);
-            await sleep (1000);
-        }
-    }
-}
-
-function tracta(data){
     
-        d = new Date(data[0][0]*1000);
-        df = new Date(data[data.length - 1][0]*1000);
-        d2 = Date.parse('2018-01-01T00:01:00.000Z');
-        //console.log("data inicial demanada : " + dataInicial + " : " + dataInicial.getTime());
-        console.log("Primera data retornada : " + d);
-        console.log("Ultima data retornada : "+ df);
-        console.log("registres retornats : "+ data.length);
-        console.log(data);
-        candle = {};
-        for (f = 0 ; f < data.length ; f++){
-            candle.exchange='"GDAX"';
-            candle.pair='"BTC-EUR"';
-            candle.dateunix = data[f][0];
-            candle.low = data[f][1];
-            candle.high = data[f][2];
-            candle.open = data[f][3];
-            candle.close = data[f][4];
-            candle.volume = data[f][5];
-            console.log(candle);
-            try{
-            sql.insertCandle(candle);
-            } catch (e) {throw e;}
-        }
-    
-}
 
 async function test3(){
     return 'retorn real ara : '+Date();
@@ -240,35 +196,12 @@ async function getPairs(){
     console.log('data : '+JSON.stringify(data));
 } */
 
-async function getGdaxPairs(){
-    var retorn = [];
-    var auxRegistre = {};
-    var aux = await(publicClient.getProducts());
-    var value;
-    
-    for (var f = 0 ; f < aux.length; f++)
-        {
-            value = aux[f];
-            if (value.quote_currency==='EUR'){
-                console.log(value.id);
-                auxRegistre={};
-                auxRegistre.id = value.id;
-                auxRegistre.base = value.base_currency;
-                auxRegistre.display = value.display_name;
-                retorn.push(auxRegistre);
-            }
-    };
-
-console.log(retorn);
-return retorn;
 
 
 
-}
-objecte.sincronitza = sincronitza;
-objecte.getGdaxPairs = getGdaxPairs;
 
-module.exports = objecte;
+
+//module.exports = objecte;
 
 // normalitza BD , en concret, GDAX-BTC-EUR
 // informem de la ultima candle
@@ -279,7 +212,7 @@ console.log('buscant duplicats ...');
 console.log('trovats i eliminats : '+await sql.eliminaDups('GDAX','BTC-EUR')+' valors');
 }
 
-eli();
+//eli();
 async function _forats(){
     let forats = await sql.buscaForats('GDAX','BTC-EUR');
     console.log ('forats trobats : '+forats.length);

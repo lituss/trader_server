@@ -1,6 +1,7 @@
 
 const Gdax = require('gdax');
 const publicClient = new Gdax.PublicClient();
+const fs = require('file-system');
 
 // 2014-11-06T10:34:47.123456Z
 
